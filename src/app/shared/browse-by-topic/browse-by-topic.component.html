@@ -1,0 +1,18 @@
+<section class="browse-by-topic section d-none d-lg-block" aria-labelledby="browse-topic-heading ">
+    <div class="section-header  align-items-center justify-content-between mb-3 d-lg-flex">
+        <h3 class="section-title mb-0">Browse by topic</h3>
+        <a class="view-all btn btn-sm btn-outline-secondary d-none d-lg-block" routerLink="/topics">View all</a>
+    </div>
+
+
+  <div class="topics-scroll " role="list" aria-label="Browse by topic">
+    <button
+      *ngFor="let t of topics; trackBy: trackById"
+      type="button"
+      class="topic-pill-grid"
+      role="listitem"
+      (click)="selectTopic(t)">
+      {{ t.name }}{{t.mark}}
+    </button>
+  </div>
+</section>

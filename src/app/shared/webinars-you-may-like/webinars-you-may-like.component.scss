@@ -1,0 +1,104 @@
+:host { display:block; --card-radius:12px; }
+
+/* layout */
+.webinars-you-may-like { padding: 1rem 1rem; }
+.section-title { font-size:1.125rem; font-weight:600; color:var(--text); } 
+/* sidebar filters */
+.filters {
+  background: transparent;
+  border: none;
+}
+.filters h5 { font-weight:700; }
+.filter-group h6 { font-weight:600; }
+
+/* Search input tiny */
+.search-input input { padding: 8px 10px; }
+
+/* feed cards */
+.feed-card {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--surface-shadow);
+  border: 1px solid rgba(0,0,0,0.04);
+  background: var(--card-bg);
+
+  .feed-header {
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    .org-logo { width: 40px; height: 40px; background-image: linear-gradient(135deg,#6f42c1,#0d6efd); }
+    .org-name { font-weight:700; font-size: 14px; }
+    .org-meta { font-size: 0.85rem; font-size: 12px; }
+  }
+
+  .feed-thumb {
+    height: 200px;
+    overflow:hidden;
+    img { width: 100%; height: 100%; object-fit: fill; display:block; }
+    .duration-badge { 
+      position:absolute; right:12px; bottom:12px;
+      background:rgba(0,0,0,0.8); color:#fff; padding:4px 6px;
+      border-radius:6px; font-size:0.75rem; 
+    }
+    .credits-pill {
+      right: 12px;
+      bottom: 12px;
+      background: rgba(255,255,255,0.95);
+      padding: 8px 10px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      box-shadow: var(--surface-shadow);
+      color: var(--text);
+      i { color: #f6b024; }
+    }
+  }
+
+  .feed-title { font-size:1rem; font-weight:700; margin:0; line-height:1.25; }
+      .heighlight-flag{ 
+      background: linear-gradient(180deg, #FFD8BD -222.79%, #FFFFFF 130.15%);
+      border-radius: 13px;
+      border: 1px solid #FFDAD8;
+
+
+      h6{ 
+        font-size: 10px!important;
+        color: #737171;
+      }
+      p{ 
+        font-size: 12px;
+        color: #444242;
+      }
+    }
+    .meta-stats{ 
+        border-top: 1px solid #EEEEEE;
+        border-bottom: 1px solid #EEEEEE;
+    }
+  .feed-actions .btn {
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    
+  }
+}
+
+    .credits-pill { 
+      display:inline-block;
+      background:linear-gradient(90deg,#fff7e6,#fff2d6);
+      color:#8a5a2f; padding:6px 10px; font-weight:600;
+      border-radius:10px; font-size:0.85rem; 
+    }
+/* Responsive behavior */
+@media (max-width: 991.98px) {
+  /* on tablet/mobile, move filters on top as a collapsible area */
+  aside.col-12.col-lg-3 { order: 2; } /* show after feed */
+  main.col-12.col-lg-9 { order: 1; }
+}
+
+/* small screens: single column feed */
+@media (max-width: 576px) {
+  .feed-thumb { height: 160px; }
+  .feed-card .feed-header .org-logo { width: 34px; height: 34px; }
+}
+
+/* focus outlines for keyboard */
+button:focus, a:focus { outline: 3px solid rgba(13,110,253,0.12); outline-offset: 3px; }

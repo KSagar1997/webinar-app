@@ -1,0 +1,36 @@
+<section class="top-speakers section" aria-labelledby="top-speakers-heading">
+  <div class="section-header d-flex align-items-center justify-content-between mb-3">
+    <h3 id="top-speakers-heading" class="section-title mb-0">Top speakers</h3>
+    <a class="view-all btn btn-sm btn-outline-secondary d-none d-lg-inline" routerLink="/speakers">View all</a>
+  </div>
+
+  <!-- Horizontal scroll capsule for mobile/tablet -->
+  <div class="speakers-scroll d-lg-none" role="list" aria-label="Top speakers">
+    <div *ngFor="let s of speakers; trackBy: trackById" class="speaker-item" role="listitem" tabindex="0" title="{{s.name}} — {{s.specialty}}">
+      <div class="speaker-card">
+        <img class="avatar" [attr.alt]="s.name" appLazyImg="{{ s.avatar }}" />
+        <div class="speaker-meta">
+          <div class="name">{{ s.name }}</div>
+          <div class="specialty text-muted">{{ s.specialty }}</div>
+        </div>
+        <div class="d-grid justify-content-center w-100"><button class="btn btn-outline-secondary btn-sm " style="width: 100%;">View profile</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Desktop grid: show more detail and multiple in a row -->
+  <div class="speakers-grid d-none d-lg-grid" role="list" aria-label="Top speakers">
+    <div *ngFor="let s of speakers; trackBy: trackById" class="speaker-card-grid" role="listitem" tabindex="0" title="{{s.name}} — {{s.specialty}}">
+      <img class="avatar-lg" [attr.alt]="s.name" appLazyImg="{{ s.avatar }}" />
+      <div class="meta">
+        <div class="name d-flex align-items-center">{{ s.name }}
+            <img class="m-2" src="../../../assets/webinarAssets/rightArrow.png" style="
+    height: 10px;
+    width: 10px;
+">
+        </div>
+        <div class="specialty text-muted">{{ s.specialty }}</div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,163 @@
+:host {
+  display: block;
+  --card-radius: 12px;
+}
+
+
+.section-header {
+  .section-title { font-size: 1.125rem; font-weight: 600; color: var(--text); }
+  .view-all { font-size: 0.85rem; }
+}
+
+.webinar-wrapper{ 
+  background: linear-gradient(190.25deg, #FFD8BD -92.66%, #FFFFFF 112.07%);
+  border-radius: 12px;
+}
+
+
+/* ---------- Horizontal scroll (mobile & tablet) ---------- */
+.horizontal-scroll {
+  display: flex;
+  gap: 0.875rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  padding-left: 0.25rem;
+  scroll-snap-type: x mandatory;
+
+  .webinar-item {
+    flex: 0 0 78%;
+    max-width: 420px;
+    scroll-snap-align: start;
+  }
+}
+
+/* ---------- Grid layout ---------- */
+.webinar-grid {
+  display: grid;
+  gap: 1rem;
+
+  /* default mobile single column */
+  grid-template-columns: repeat(1, 1fr);
+
+  /* tablet */
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* desktop */
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card surface common styles */
+.card-surface {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  background: var(--card-bg);
+  box-shadow: var(--surface-shadow);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  .card-thumb {
+    position: relative;
+    .thumb-img { height: 180px; object-fit: cover; display:block; }
+
+    .live-badge {
+      position: absolute; left: 12px; top: 12px;
+      background: rgba(255,255,255,0.92); padding: 4px 8px; border-radius: 999px;
+      font-weight:600; color:#d63384;
+      display:inline-flex; align-items:center; gap:6px;
+      box-shadow:0 4px 12px rgba(8,10,14,0.06);
+      .live-dot { color:#ff3b30; font-size:0.7rem; }
+    }
+
+    .viewers-badge {
+      position:absolute; right:12px; top:12px;
+      background:rgba(0,0,0,0.06); padding:4px 8px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:6px; color:var(--text);
+    }
+
+    .duration-badge { 
+      position:absolute; right:12px; bottom:12px;
+      background:rgba(0,0,0,0.8); color:#fff; padding:4px 6px;
+      border-radius:6px; font-size:0.75rem; 
+    }
+  }
+
+  .card-body {
+    padding: 1rem;
+    display:flex; flex-direction:column; gap:0.5rem; flex:1 1 auto;
+
+    .credits-pill { 
+      display:inline-block;
+      background:linear-gradient(90deg,#fff7e6,#fff2d6);
+      color:#8a5a2f; padding:6px 10px; font-weight:600;
+      border-radius:10px; font-size:0.85rem; 
+    }
+
+    .card-title { 
+      font-size:1rem; font-weight:600; margin:0; line-height:1.3; color:var(--text);
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+      overflow:hidden; 
+      height: 50px;
+    }
+
+    .card-subtitle { font-size:0.85rem; color:var(--muted); }
+
+    .key-highlights { background: var(--bg); padding: 6px 8px; border-radius: 8px; }
+
+    button.btn-dark { background:#111; border:none; border-radius:6px; }
+
+    .heighlight-flag{ 
+      background: linear-gradient(180deg, #FFD8BD -222.79%, #FFFFFF 130.15%);
+      border-radius: 13px;
+      border: 1px solid #FFDAD8;
+
+
+      h6{ 
+        font-size: 10px!important;
+        color: #737171;
+      }
+      p{ 
+        font-size: 12px;
+        color: #444242;
+      }
+    }
+
+  }
+}
+
+
+
+/* Accessibility focus */
+a:focus, button:focus { 
+  outline: 3px solid rgba(13,110,253,0.12);
+  outline-offset: 3px; 
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .horizontal-scroll .webinar-item { flex: 0 0 45%; }
+
+}
+@media (max-width: 576px) {
+  .card-surface {
+    .card-body {
+      .card-title {
+        height: 100px;
+      }
+  
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .horizontal-scroll .webinar-item { flex: 0 0 93%; }
+  .card-surface .card-thumb .thumb-img { height: 140px; }
+  .card-body { padding: 0.75rem; }
+  .duration-badge { font-size: 0.7rem; padding: 3px 5px; }
+
+}

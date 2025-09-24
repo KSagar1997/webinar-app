@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* Theme variables + small snippet (more below) */
+:root {
+  --bg: #f7f4f4;
+  --card-bg: #fff;
+  --text: #222;
+  --muted: #6c757d;
+  --primary: #0d6efd;
+  --surface-shadow: 0 6px 18px rgba(13,20,30,0.06);
+}
+[data-theme="dark"] {
+  --bg: #0b1220;
+  --card-bg: #0f1724;
+  --text: #e6eef6;
+  --muted: #9aa3ad;
+  --surface-shadow: none;
+}
+body { background: var(--bg); color: var(--text); font-family: Inter, system-ui, -apple-system; }
+.webinar-card { background: var(--card-bg); box-shadow: var(--surface-shadow); border-radius: 12px; }

@@ -1,0 +1,32 @@
+.section-header {
+  .section-title { font-size: 1.125rem; font-weight: 600; color: var(--text); }
+  .view-all { font-size: 0.85rem; }
+}
+
+.topics-scroll {
+  display: grid;
+  grid-auto-flow: column;      
+  grid-auto-rows: 1fr;        
+  grid-template-rows: repeat(2, auto); 
+  gap: 8px;                   
+  overflow-x: auto;          
+  padding: 8px 6px;
+  scrollbar-width: none;   
+  background-color: #D9F4F9; 
+  border-radius: 14px;   
+}
+
+.topics-scroll::-webkit-scrollbar {
+  display: none;  
+}
+
+.topic-pill-grid {
+  white-space: nowrap;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #FFFFFF;
+  border: 1px solid #D0D0D0;
+  cursor: pointer;
+  font-size: 14px;
+    text-align: left;
+}

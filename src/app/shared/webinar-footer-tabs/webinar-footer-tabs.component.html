@@ -1,0 +1,14 @@
+<nav class="webinar-tabs" aria-label="Webinar tabs">
+  <ul class="tabs-list" role="tablist">
+    <li *ngFor="let t of tabs" class="tab-item" role="presentation">
+      <button
+        class="tab-btn"
+        role="tab"
+        [attr.aria-selected]="active === t.id"
+        [class.active]="active === t.id"
+        (click)="goToTab(t)">
+        {{ t.label }}
+      </button>
+    </li>
+  </ul>
+</nav>

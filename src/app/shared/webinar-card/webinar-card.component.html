@@ -1,0 +1,12 @@
+<article class="webinar-card p-3">
+    <div class="position-relative">
+        <img class="w-100 rounded" [attr.src]="image" alt="{{title}}" loading="lazy" />
+        <span class="badge bg-warning position-absolute top-0 start-0 m-2">{{credits}} Credits</span>
+    </div>
+    <h5 class="mt-2">{{ title }}</h5>
+    <p class="text-muted small mb-2">{{ subtitle }}</p>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+        <button class="btn btn-sm btn-outline-dark">Watch now</button>
+        <small class="text-muted">{{ time }}</small>
+    </div>
+</article>

@@ -1,0 +1,98 @@
+<section class="upcoming-webinars section">
+  <div class="section-header d-flex align-items-center justify-content-between mb-3 d-none d-lg-flex">
+    <h3 class="section-title mb-0">Continue watching</h3>
+
+    <div class="d-flex align-items-center">
+      <a class="view-all btn btn-sm btn-outline-secondary d-none d-lg-block" (click)="toggleShowAll()"> View all</a>
+    </div>
+  </div>
+  <div class="webinar-wrapper px-4 px-md-0 px-lg-0 py-4" role="list" aria-label="Live webinars list">
+    <!-- Horizontal scroll on small screens -->
+    <div class="section-header d-flex align-items-center justify-content-between mb-3 d-lg-none d-md-none">
+      <h3 class="section-title mb-0">Continue watching</h3>
+      <a class="view-all btn btn-sm d-lg-none d-md-none align-items-center" (click)="toggleShowAll()"> View all <img src="../../../assets/icons/arrow.png" alt=""></a>
+    </div>
+    <div class="horizontal-scroll " role="list" aria-label="Continue watching">
+      <article *ngFor="let u of upcoming" class="webinar-item" role="listitem">
+        <div class="card card-surface">
+          <div class="card-thumb position-relative">
+            <img class="thumb-img w-100" [attr.alt]="u.title" appLazyImg="{{ u.image }}" />
+            <div class="duration-badge">{{ u.duration }}</div>
+            <div class="progress-container">
+                <div
+                    class="progress-bar"
+                    [style.width.%]="u.progress"
+                ></div>
+            </div>
+          </div>
+
+          <div class="card-body p-0">
+            <div class="credits mx-3 mt-2 mb-1 d-lg-none d-md-none"><span class="credits-pill">
+              <img src="../../../assets/webinarAssets/Frame 48100047.png" alt="" width="18px">
+              {{ u.credits }} Credits <span *ngIf="u.expiresIn" style="color: red;">{{ u.expiresIn }}</span></span>  
+            </div>
+
+            <h5 class="card-title mt-md-2 mt-lg-2 mx-3">{{ u.title }}</h5>
+             <div class="d-flex align-items-center justify-content-between mb-2 mx-3">
+                 <div class="d-flex align-items-center">
+                     <img [src]="u.subtitleIcon" width="14" height="14" class="me-2" alt="icon" />
+                     <p class="card-subtitle text-muted mb-0">{{ u.subtitle }}</p>
+                 </div>
+                <p class="card-subtitle text-muted mb-0">{{ u.remaningTime }}</p>
+                 
+            </div>
+
+            <!-- <div class="d-flex align-items-center justify-content-between mt-auto bottom-sec p-2">
+              <div class="d-flex flex-column">
+                <small class="starts-in text-muted"></small>
+                <div class="d-flex justify-content-between mt-1" style="font-size: 8px; font-weight: 600; ">
+                  <div class="start-date ">{{ u.startAt | date:'dd MMM YYYY' }},</div>
+                  <div class="start-time">{{ u.startAt | date:'hh:mm a' }}</div>
+                </div>
+
+              </div>
+              
+            </div> -->
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Desktop grid -->
+    <!-- <div class="webinar-grid d-none d-lg-grid d-md-grid" role="list" aria-label="Continue watching">
+      <article *ngFor="let u of (isMediumScreen || showAll ? upcoming : (upcoming | slice:0:3))" class="webinar-item"
+        role="listitem">
+        <div class="card card-surface">
+          <div class="card-thumb position-relative">
+            <img class="thumb-img w-100" [attr.alt]="u.title" appLazyImg="{{ u.image }}" />
+          </div>
+
+          <div class="card-body p-0">
+            <div class="credits mt-2 mb-1"><span class="credits-pill">
+              <img src="../../../assets/webinarAssets/Frame 48100047.png" alt="" width="18px">
+              {{ u.credits }} Credits <span *ngIf="u.expiresIn" style="color: red;">{{ u.expiresIn }}</span></span>  </div>
+
+            <h5 class="card-title mx-3">{{ u.title }}</h5>
+            <div class="d-flex align-items-center mb-2 mx-3">
+              <img [src]="u.subtitleIcon" width="14" height="14" class="me-2" alt="icon" />
+              <p class="card-subtitle text-muted mb-0">{{ u.subtitle }}</p>
+            </div>
+
+
+
+            <div class="d-flex align-items-center justify-content-between mt-auto bottom-sec p-2">
+              <div class="d-flex flex-column lhs">
+                <small class="starts-in text-muted"></small>
+                <div class="d-flex justify-content-between mt-1 time" >
+                </div>
+
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </article>
+    </div> -->
+  </div>
+
+</section>

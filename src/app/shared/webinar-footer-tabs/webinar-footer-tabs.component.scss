@@ -1,0 +1,66 @@
+:host { display:block; }
+
+.webinar-tabs {
+  --bg: var(--card-bg);
+  --border: rgba(0,0,0,0.06);
+  --accent: var(--primary);
+  padding: 0;
+
+  .tabs-list {
+    display:flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-items: center;
+  }
+
+  .tab-btn {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color .12s ease, border-bottom .12s ease;
+  }
+
+  .tab-btn.active {
+    color: var(--text);
+    border-bottom: 3px solid var(--accent);
+  }
+
+  .tab-btn:focus {
+    outline: 3px solid rgba(13,110,253,0.12);
+    outline-offset: 3px;
+  }
+}
+
+/* Desktop: fixed dock bottom-right */
+@media (min-width: 992px) {
+  .webinar-tabs {
+    .tabs-list {
+    }
+    .tab-btn { padding: 10px 14px; }
+  }
+}
+
+/* Mobile / Tablet: inline top tab bar */
+@media (max-width: 991.98px) {
+  .webinar-tabs {
+    position: relative;
+    margin: 0 0 12px 0;
+    .tabs-list {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      gap: 18px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      scroll-snap-type: x proximity;
+    }
+    .tab-item { scroll-snap-align: start; }
+    .tab-btn { padding: 8px 10px; border-radius: 0; }
+    .tab-btn.active { border-bottom: 3px solid var(--accent); }
+  }
+}

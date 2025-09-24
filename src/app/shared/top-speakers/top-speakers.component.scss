@@ -1,0 +1,170 @@
+:host {
+    display: block;
+    --avatar-size: 72px;
+    --avatar-lg: 96px;
+    --card-radius: 12px;
+}
+
+.section {
+    padding: 1rem 0;
+}
+
+.section-header {
+    .section-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text);
+    }
+}
+
+/* --------- Mobile / Tablet: horizontal scroll list --------- */
+.speakers-scroll {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    scroll-snap-type: x mandatory;
+
+    .speaker-item {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        width: 62%;
+        /* good thumbnail width on phones */
+        max-width: 320px;
+        outline: none;
+
+        .speaker-card {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+            gap: 0.75rem;
+            padding: 0.6rem;
+            background: linear-gradient(180deg, rgba(247, 198, 173, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+            border-radius: 12px;
+            box-shadow: var(--surface-shadow);
+            min-height: 88px;
+
+            .avatar {
+                width: var(--avatar-size);
+                height: var(--avatar-size);
+                border-radius: 999px;
+                object-fit: cover;
+                flex: 0 0 var(--avatar-size);
+                box-shadow: 0 6px 18px rgba(10, 20, 30, 0.06);
+                border: 2px solid rgba(0, 0, 0, 0.06);
+            }
+
+            .speaker-meta {
+                .name {
+                    font-weight: 600;
+                    color: var(--text);
+                    font-size: 0.95rem;
+                }
+
+                .specialty {
+                    font-size: 0.85rem;
+                    color: var(--muted);
+                    margin-top: 2px;
+                }
+            }
+        }
+
+        &:focus-within,
+        &:focus {
+            outline: 3px solid rgba(13, 110, 253, 0.12);
+            outline-offset: 3px;
+        }
+    }
+}
+
+/* --------- Desktop grid --------- */
+.speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+
+    .speaker-card-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: linear-gradient(180deg, rgba(247, 198, 173, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+        border-radius: 12px;
+        box-shadow: var(--surface-shadow);
+
+        .avatar-lg {
+            width: var(--avatar-lg);
+            height: var(--avatar-lg);
+            border-radius: 999px;
+            object-fit: cover;
+            box-shadow: 0 8px 22px rgba(10, 20, 30, 0.06);
+            border: 2px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .meta {
+            .name {
+                font-size: 1rem;
+                font-weight: 700;
+                color: var(--text);
+            }
+
+            .specialty {
+                font-size: 0.9rem;
+                color: var(--muted);
+                margin-top: 2px;
+            }
+        }
+
+        &:focus-within,
+        &:focus {
+            outline: 3px solid rgba(13, 110, 253, 0.12);
+            outline-offset: 3px;
+        }
+    }
+}
+
+/* tweaks for medium screens: show 2 per row */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .speakers-grid {
+        // grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+
+    .speakers-grid {
+        .speaker-card-grid {
+        background: linear-gradient(180deg, rgba(247, 198, 173, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+
+/* tweak for very small screens */
+@media (max-width: 420px) {
+    .speakers-scroll .speaker-item {
+        width: 84%;
+    }
+
+    :host {
+        --avatar-size: 64px;
+        --avatar-lg: 80px;
+    }
+
+    .speakers-grid {
+        .speaker-card-grid {
+        background: linear-gradient(180deg, rgba(247, 198, 173, 1) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 255, 255, 1) 100%);
+
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}

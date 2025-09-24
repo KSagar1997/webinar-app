@@ -1,0 +1,164 @@
+<!-- Desktop Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white p-0 d-none d-lg-flex">
+  <div class="container-fluid" style="padding: 0px 6rem;">
+    <a class="navbar-brand" href="#">
+      <img src="../../../assets/icons/logo.svg" alt="Docquity" width="36" />
+    </a>
+
+    <div class="search-container mx-4 flex-grow-1">
+      <form (ngSubmit)="onSearchSubmit()" class="d-flex" style="background-color: #EFEFEF; width: 347px;">
+        <div class="input-group">
+          <input type="text" class="form-control search-input" placeholder="Search in docquity"
+                 [(ngModel)]="searchQuery" name="searchQuery" style="background-color: #EFEFEF;">
+          <button class="btn search-btn" type="submit" style="background-color: #EFEFEF;">
+            <img src="../../../assets/icons/Search.png" alt="Search"/>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="nav-items d-flex align-items-center">
+      <div class="nav-item justify-content-center" *ngFor="let item of navItems" [class.active]="item.isActive"
+          (click)="onNavItemClick(item)" [routerLink]="item.route"  (mouseenter)="onMouseEnter(item)"
+          (mouseleave)="onMouseLeave()">
+        <img [src]="item.icon" [alt]="item.name" class="nav-icon">
+        <span class="nav-label" *ngIf="hoveredItem === item.name || item.isActive">{{ item.name }}</span>
+      </div>
+    </div>
+
+    <div class="right-section d-flex align-items-center ms-4">
+      <button class="btn btn-dark post-btn me-3" (click)="onPostClick()">
+        <img src="../../../assets/icons/plus.png" alt="Plus" style="width: 29px;" [ngStyle]="{ display: smallDesktop ? 'none' : '' }"/>
+        Post
+      </button>
+      
+      <div class="user-profile dropdown">
+        <div class="user-avatar" data-bs-toggle="dropdown">
+          <div class="profile-wrapper">
+            <div class="profile-image placeholder-avatar">
+                <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
+            </div>
+            <div class="verify-badge">
+                 <img src="../../../assets/icons/Verify.png">
+            </div>
+          </div>
+          <span class="user-name">{{ user.name }}</span>
+          <i class="fas fa-chevron-down ms-2"></i>
+        </div>
+        
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Tablet & Mobile Navbar -->
+<nav class="navbar navbar-light bg-white shadow-sm d-lg-none d-flex">
+  <div class="container-fluid">
+    <!-- Hamburger for Tablet -->
+    <button class="navbar-toggler border-0 d-md-block d-none" (click)="toggleMobileMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Back Button for Mobile -->
+    <button class="btn btn-link p-0 me-3 d-md-none" *ngIf="isMobileMenuOpen">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <!-- Mobile Title -->
+    <div class="flex-grow-1 d-md-none" *ngIf="!isMobileMenuOpen">
+      <h5 class="mb-0">Webinar</h5>
+    </div>
+
+    <!-- Search Bar for Both -->
+    <div class="search-container" [ngClass]="{
+      'flex-grow-1 mx-3 d-none d-md-block': true,
+      'd-block': isMobileMenuOpen,
+      'd-none': !isMobileMenuOpen && isMobile
+    }">
+      <form (ngSubmit)="onSearchSubmit()" class="d-flex">
+        <div class="input-group">
+          <input type="text" class="form-control search-input" placeholder="Search in docquity"
+                 [(ngModel)]="searchQuery" name="searchQuery">
+          <button class="btn search-btn" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="d-flex align-items-center">
+      <!-- Tablet Right Icons -->
+      <div class="nav-item me-3 d-none d-md-block">
+        <img src="assets/icons/Bell.png" alt="Notifications" class="nav-icon-small">
+      </div>
+      
+      <button class="btn btn-dark rounded-circle post-btn-round d-flex justify-content-center d-none d-md-flex" 
+              (click)="onPostClick()">
+        <img src="../../../assets/icons/plus.png" alt="Plus"/>
+      </button>
+      
+      <div class="user-profile dropdown ms-3 d-none d-md-block">
+        <div class="user-avatar" data-bs-toggle="dropdown">
+          <div class="profile-wrapper">
+            <div class="profile-image placeholder-avatar">
+                <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
+            </div>
+            <div class="verify-badge">
+                 <img src="../../../assets/icons/Verify.png">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Right Icons -->
+      <div class="d-flex align-items-center d-md-none">
+        <button class="btn btn-link p-2" (click)="toggleMobileMenu()">
+          <img src="../../../assets/icons/Search.png" alt="Search"/>
+        </button>
+        <button class="btn btn-link p-2" (click)="toggleMobileMenu()">
+          <img src="../../../assets/icons/Filter.png" alt="Filter"/>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Modal Menu -->
+<div class="modal-menu" [class.show]="isMobileMenuOpen" (click)="toggleMobileMenu()">
+  <div class="menu-content" (click)="$event.stopPropagation()">
+    <div class="menu-header">
+      <img [src]="user.avatar" [alt]="user.name" class="menu-avatar">
+      <div class="ms-3">
+        <h6 class="mb-0">{{ user.name }}</h6>
+        <small class="text-success">Online</small>
+      </div>
+      <button class="btn-close ms-auto" (click)="toggleMobileMenu()"></button>
+    </div>
+    
+    <div class="menu-items">
+      <div class="menu-item" *ngFor="let item of navItems" 
+           [class.active]="item.isActive" (click)="onNavItemClick(item)" [routerLink]="item.route">
+        <img [src]="item.icon" [alt]="item.name" class="menu-icon">
+        <span>{{ item.name }}</span>
+      </div>
+      
+      <hr>
+      
+      <div class="menu-item">
+        <i class="fas fa-cog menu-icon-text"></i>
+        <span>Settings</span>
+      </div>
+      
+      <div class="menu-item">
+        <i class="fas fa-sign-out-alt menu-icon-text"></i>
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,146 @@
+<section class="webinars-you-may-like container-fluid">
+  <div class="section-header d-flex align-items-center justify-content-between mb-3">
+    <h3 class="section-title mb-0">Webinars you may like</h3>
+  </div>
+  <div class="d-lg-flex g-3">
+    <!-- Sidebar filters (left) -->
+    <aside class="col-12 col-lg-3 d-none d-lg-flex">
+      <div class="filters card p-3">
+
+        <!-- Specialty group -->
+        <div class="filter-group mb-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Specialty</h6>
+            <button class="btn btn-sm btn-link text-muted" (click)="toggleCollapse('topics')" [attr.aria-expanded]="!collapsed.topics">
+              <i class="bi" [ngClass]="collapsed.topics ? 'bi-chevron-down' : 'bi-chevron-up'"></i>
+            </button>
+          </div>
+
+          <div *ngIf="!collapsed.topics" class="mt-2">
+            <div class="search-input mb-2">
+              <input type="search" class="form-control form-control-sm" placeholder="Search" [(ngModel)]="specialtyQuery" />
+            </div>
+
+            <div class="specialty-list" role="list">
+              <div *ngFor="let s of filteredSpecialties" class="form-check mb-1">
+                <input class="form-check-input" type="checkbox" [id]="s" [checked]="isSelected(s)" (change)="toggleSpecialty(s)">
+                <label class="form-check-label small" [for]="s">{{ s }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Topics / Speakers / Pharma as collapsible placeholders -->
+        <div class="filter-group mb-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Topics</h6>
+            <button class="btn btn-sm btn-link text-muted" (click)="toggleCollapse('topics')" [attr.aria-expanded]="!collapsed.topics">
+              <i class="bi" [ngClass]="collapsed.topics ? 'bi-chevron-down' : 'bi-chevron-up'"></i>
+            </button>
+          </div>
+          <div *ngIf="!collapsed.topics" class="mt-2">
+            <!-- sample pills -->
+            <div class="d-flex flex-wrap gap-2">
+              <button class="btn btn-sm btn-outline-secondary">Cardiology</button>
+              <button class="btn btn-sm btn-outline-secondary">General</button>
+              <button class="btn btn-sm btn-outline-secondary">Emergency</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="filter-group mb-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Speakers</h6>
+            <button class="btn btn-sm btn-link text-muted" (click)="toggleCollapse('speakers')" [attr.aria-expanded]="!collapsed.speakers">
+              <i class="bi" [ngClass]="collapsed.speakers ? 'bi-chevron-down' : 'bi-chevron-up'"></i>
+            </button>
+          </div>
+          <div *ngIf="!collapsed.speakers" class="mt-2">
+            <div class="small text-muted">Choose specific speakers</div>
+          </div>
+        </div>
+
+        <div class="filter-group mb-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Pharma &amp; associations</h6>
+            <button class="btn btn-sm btn-link text-muted" (click)="toggleCollapse('pharma')" [attr.aria-expanded]="!collapsed.pharma">
+              <i class="bi" [ngClass]="collapsed.pharma ? 'bi-chevron-down' : 'bi-chevron-up'"></i>
+            </button>
+          </div>
+          <div *ngIf="!collapsed.pharma" class="mt-2">
+            <div class="small text-muted">Industry partners</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Feed cards (right) -->
+    <main class="col-12 col-lg-9">
+      <div class="row row-cols-1 row-cols-md-2 g-3">
+        <div class="col" *ngFor="let item of feed; trackBy: trackById">
+          <article class="card feed-card h-100">
+            <div class="card-body p-0">
+              <!-- header: org + follow + menu -->
+              <div class="feed-header d-flex align-items-center justify-content-between p-3">
+                <div class="d-flex align-items-center">
+                  <div class="org-avatar me-2">
+                    <div class="rounded-circle"><img src="../../../assets/webinarAssets/profile1.png" alt=""></div>
+                  </div>
+                  <div>
+                    <div class="org-name">{{ item.org }}</div>
+                    <div class="org-meta small text-muted d-flex flex-column">{{ item.sponsor }} 
+                        <div>{{ item.followers | number }} followers • {{ item.timeAgo }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                  <button class="btn btn-sm" style="color: #2F80ED;" (click)="follow(item.org)">+ Follow</button>
+                  <button class="btn btn-sm btn-link text-muted" (click)="moreOptions(item)" aria-label="More options">
+                    <i class="bi bi-three-dots-vertical"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- image -->
+              <div class="feed-thumb position-relative">
+                <img class="w-100" [attr.alt]="item.title" appLazyImg="{{ item.image }}" />
+                <div class="duration-badge">{{ item.duration }}</div>
+                
+              </div>
+
+              <!-- content -->
+              <div class="p-3">
+                <div class="credits mt-2 mb-2"><span class="credits-pill">
+                    <img src="../../../assets/webinarAssets/Frame 48100047.png" alt="" width="18px">
+                    {{ item.credits }} <span *ngIf="item.expiring" style="color: red;">{{ item.expiring }}</span></span>  
+                </div>
+
+                <h5 class="feed-title">{{ item.title }}</h5>
+                <div class="d-flex flex-column heighlight-flag p-2 mt-2">
+                    <h6 class="">KEY HIGHLIGHTS </h6>
+                    <p class="heighlight-text m-0">{{item.keyHeighlights}}</p>
+                </div>
+
+                <div class="meta-stats d-flex align-items-center gap-3 small text-muted mt-3">
+                  <div>{{ item.likes }} Likes</div>
+                  <div>• {{ item.comments }} Comments</div>
+                  <div class="ms-auto">{{ item.views }} Views</div>
+                </div>
+
+                <!-- footer actions -->
+                <div class="feed-actions d-flex justify-content-between align-items-center mt-3">
+                    <button class="btn btn-sm btn-light d-flex flex-column align-items-center" (click)="like(item)"><img src="../../../assets/webinarAssets/like.png" alt="" width="20">Like</button>
+                    <button class="btn btn-sm btn-light d-flex flex-column align-items-center" (click)="comment(item)"><img src="../../../assets/webinarAssets/Comment.png" width="20">Comment</button>
+                    <button class="btn btn-sm btn-light d-flex flex-column align-items-center" (click)="repost(item)"><img src="../../../assets/webinarAssets/repost.png"  width="20">Repost</button>
+                    <button class="btn btn-sm btn-light d-flex flex-column align-items-center" (click)="share(item)"><img src="../../../assets/webinarAssets/share.png"  width="20"> Share</button>
+
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+</section>
