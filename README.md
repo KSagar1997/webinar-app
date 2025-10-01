@@ -26,4 +26,5 @@ It provides an intuitive interface with sections for live, upcoming, and past we
 
 ---
 
-## 📂 Project Structure
+## 📂 Live URL:
+- [Live netlify Link](https://webinar-app-aks.netlify.app/webinars)
